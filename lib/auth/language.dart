@@ -28,18 +28,16 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
     language.add(LanguagesModel('Azərbaycan dili', 'Azerbaijan'));
     language.add(LanguagesModel('বাংলা', 'Bengali'));
     language.add(LanguagesModel('Българи', 'Bulgarian'));
-    language.add(LanguagesModel('Catalan', 'Catalan'));
-    language.add(LanguagesModel('Chinese (CHN)', 'zh_CN'));
-    language.add(LanguagesModel('Chinese (HKG)', 'zh_HK'));
-    language.add(LanguagesModel('Croatian', 'hr'));
-    language.add(LanguagesModel('Czech', 'cs'));
-    language.add(LanguagesModel('Danish', 'da'));
+    language.add(LanguagesModel('català', 'Catalan'));
+    language.add(LanguagesModel('汉语/漢語', 'zh_CN'));
+    language.add(LanguagesModel('hrvatski', 'hr'));
+    language.add(LanguagesModel('čeština', 'cs'));
+    language.add(LanguagesModel('dansk', 'da'));
     language.add(LanguagesModel('Dutch', 'nl'));
-    language.add(LanguagesModel('English', 'en'));
-    language.add(LanguagesModel('Hindi', 'hi'));
-    language.add(LanguagesModel('Urdu', 'ur'));
-    language.add(LanguagesModel('Vietnamese', 'vi'));
-    language.add(LanguagesModel('Zulu', 'Zulu'));
+    language.add(LanguagesModel('हिन्दी', 'hi'));
+    language.add(LanguagesModel('اردو', 'ur'));
+    language.add(LanguagesModel('TiếngViệt', 'vi'));
+    language.add(LanguagesModel('isiZulu', 'Zulu'));
 
     model = language[0].title;
 
@@ -56,7 +54,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           Icons.arrow_forward,
           color: colorWhite,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/WelcomeScreen');
+        },
       ),
       body: Column(
         children: [
