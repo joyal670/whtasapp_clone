@@ -49,7 +49,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/LoginScreen');
+          },
           child: Text(
             'Agree and contiune',
             style: TextStyle(color: colorWhite),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/auth/language.dart';
+import 'package:whatsapp_clone/auth/login.dart';
 import 'package:whatsapp_clone/auth/welcome.dart';
 
 void main() {
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/LanguageSelectionScreen': (context) =>
             const LanguageSelectionScreen(),
-        '/WelcomeScreen': (context) => const WelcomeScreen()
+        '/WelcomeScreen': (context) => const WelcomeScreen(),
+        '/LoginScreen': (context) => const LoginScreen(),
       },
     );
   }
