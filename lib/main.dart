@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
             const LanguageSelectionScreen(),
         '/WelcomeScreen': (context) => const WelcomeScreen(),
         '/LoginScreen': (context) => const LoginScreen(),
+        '/LanguageSelect': (context) => const LanguageSelectScreen(),
       },
     );
   }
