@@ -10,10 +10,25 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final phoneController = TextEditingController();
+
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          final text = phoneController.text;
+
+          if (text.isEmpty) {
+            pop_up(
+              context,
+              'Please enter your phone number',
+            );
+          } else if (text.length < 10) {
+            pop_up(context, 'The phone number you entered is too short.');
+          } else {
+            pop_up1(context, 'You entered the phone number:', text);
+          }
+        },
         child: Text(
           'Next',
           style: TextStyle(color: colorWhite),
@@ -97,10 +112,12 @@ class LoginScreen extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: TextField(
+                      controller: phoneController,
                       keyboardType: TextInputType.phone,
                       maxLength: 10,
-                      textAlign: TextAlign.center,
                       decoration: InputDecoration(
+                        hintText: 'phone number',
+                        hintStyle: TextStyle(color: colorGrey),
                         counterText: '',
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: colorDarkGreen),
@@ -122,6 +139,78 @@ class LoginScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> pop_up(BuildContext context, String title) {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(title),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'OK',
+                style: TextStyle(color: colorDarkGreen, fontSize: 14),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> pop_up1(BuildContext context, String title, String mobile) {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+              child: ListBody(
+            children: <Widget>[
+              Text(title),
+              height10,
+              Text(
+                mobile,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              height10,
+              Text('Is this OK, or would you like to edit the number'),
+            ],
+          )),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  child: const Text(
+                    'Edit',
+                    style: TextStyle(color: colorDarkGreen, fontSize: 14),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: const Text(
+                    'OK',
+                    style: TextStyle(color: colorDarkGreen, fontSize: 14),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/OTPScreen');
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -157,36 +246,81 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
         "",
         "https://www.worldometers.info//img/flags/small/tn_pk-flag.gif",
         "+92"));
-    language.add(Languages('Afghanistan', "",
-        "https://www.worldometers.info//img/flags/small/tn_af-flag.gif", "+1"));
-    language.add(Languages('Australia', "",
-        "https://www.worldometers.info//img/flags/small/tn_as-flag.gif", "+1"));
-    language.add(Languages('Bahrain', "",
-        "https://www.worldometers.info//img/flags/small/tn_ba-flag.gif", "+1"));
-    language.add(Languages('Bangladesh', "",
-        "https://www.worldometers.info//img/flags/small/tn_bg-flag.gif", "+1"));
-    language.add(Languages('China', "",
-        "https://www.worldometers.info//img/flags/small/tn_ch-flag.gif", "+1"));
-    language.add(Languages('Denmark', "",
-        "https://www.worldometers.info//img/flags/small/tn_da-flag.gif", "+1"));
-    language.add(Languages('Egypt', "",
-        "https://www.worldometers.info//img/flags/small/tn_eg-flag.gif", "+1"));
-    language.add(Languages('Finland', "",
-        "https://www.worldometers.info//img/flags/small/tn_fi-flag.gif", "+1"));
-    language.add(Languages('Germany', "",
-        "https://www.worldometers.info//img/flags/small/tn_gm-flag.gif", "+1"));
-    language.add(Languages('Hungary', "",
-        "https://www.worldometers.info//img/flags/small/tn_hu-flag.gif", "+1"));
-    language.add(Languages('Japan', "",
-        "https://www.worldometers.info//img/flags/small/tn_ja-flag.gif", "+1"));
-    language.add(Languages('Kuwait', "",
-        "https://www.worldometers.info//img/flags/small/tn_ku-flag.gif", "+1"));
-    language.add(Languages('Libya', "",
-        "https://www.worldometers.info//img/flags/small/tn_ly-flag.gif", "+1"));
-    language.add(Languages('Maldives', "",
-        "https://www.worldometers.info//img/flags/small/tn_mv-flag.gif", "+1"));
-    language.add(Languages('Panama', "",
-        "https://www.worldometers.info//img/flags/small/tn_pm-flag.gif", "+1"));
+    language.add(Languages(
+        'Afghanistan',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_af-flag.gif",
+        "+93"));
+    language.add(Languages(
+        'Australia',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_as-flag.gif",
+        "+61"));
+    language.add(Languages(
+        'Bahrain',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_ba-flag.gif",
+        "+973"));
+    language.add(Languages(
+        'Bangladesh',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_bg-flag.gif",
+        "+880"));
+    language.add(Languages(
+        'China',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_ch-flag.gif",
+        "+86"));
+    language.add(Languages(
+        'Denmark',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_da-flag.gif",
+        "+45"));
+    language.add(Languages(
+        'Egypt',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_eg-flag.gif",
+        "+20"));
+    language.add(Languages(
+        'Finland',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_fi-flag.gif",
+        "+358"));
+    language.add(Languages(
+        'Germany',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_gm-flag.gif",
+        "+49"));
+    language.add(Languages(
+        'Hungary',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_hu-flag.gif",
+        "+36"));
+    language.add(Languages(
+        'Japan',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_ja-flag.gif",
+        "+81"));
+    language.add(Languages(
+        'Kuwait',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_ku-flag.gif",
+        "+965"));
+    language.add(Languages(
+        'Libya',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_ly-flag.gif",
+        "+218"));
+    language.add(Languages(
+        'Maldives',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_mv-flag.gif",
+        "+960"));
+    language.add(Languages(
+        'Panama',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_pm-flag.gif",
+        "+Panama"));
     language.add(Languages(
         'South Africa',
         "",
@@ -196,9 +330,12 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
         'Switzerland',
         "",
         "https://www.worldometers.info//img/flags/small/tn_sz-flag.gif",
-        "+44"));
-    language.add(Languages('Ukraine', "",
-        "https://www.worldometers.info//img/flags/small/tn_up-flag.gif", "+1"));
+        "+41"));
+    language.add(Languages(
+        'Ukraine',
+        "",
+        "https://www.worldometers.info//img/flags/small/tn_up-flag.gif",
+        "+380"));
     super.initState();
   }
 
@@ -213,17 +350,23 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
       ),
       body: ListView.separated(
           itemBuilder: (context, index) {
-            return ListTile(
-              leading: Image.network(
-                language[index].image,
-                width: 20,
-                height: 20,
-              ),
-              title: Text(language[index].title),
-              subtitle: Text(language[index].subTitle),
-              trailing: Text(
-                language[index].code,
-                style: TextStyle(fontWeight: FontWeight.bold, color: colorGrey),
+            return InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: ListTile(
+                leading: Image.network(
+                  language[index].image,
+                  width: 20,
+                  height: 20,
+                ),
+                title: Text(language[index].title),
+                //  subtitle: Text(language[index].subTitle),
+                trailing: Text(
+                  language[index].code,
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, color: colorGrey),
+                ),
               ),
             );
           },
